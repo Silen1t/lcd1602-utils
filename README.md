@@ -34,9 +34,14 @@ bind_interrupts!(struct Irqs {
 async fn main(spawner: Spawner) {
     let p = embassy_rp::init(Default::default());
 
+    let i2c0 = p.I2C0;
+    let scl = p.PIN_17;
+    let sda = p.PIN_16:
+    let update_screen_time:u32 = 20;
     // Init LCD
-    let mut lcd = Lcd::new(p.I2C0, p.PIN_17, p.PIN_16, 20).await;
+    let mut lcd = Lcd::new(i2c0, scl, sda, update_screen_time).await;
     lcd.clear_display().await.unwrap();
+
     lcd.display_text("Hello World", false).await.unwrap();
 
 }
