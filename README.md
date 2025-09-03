@@ -23,7 +23,7 @@ Add this to your `Cargo.toml`:
 
 ```toml
 [dependencies]
-lcd1602_utils = {git = "https://github.com/Silen1t/lcd1602-utils"}
+lcd1602_utils = {git = "https://github.com/Silen1t/lcd1602-utils.git"}
 ```
 
 ## How to use it
