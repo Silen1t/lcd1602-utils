@@ -17,6 +17,15 @@
 
 ---
 
+## How to add it
+
+Add this to your `Cargo.toml`:
+
+```toml
+[dependencies]
+lcd1602_utils = {git = "https://github.com/Silen1t/lcd1602-utils"}
+```
+
 ## How to use it
 ```rs
 use defmt::*;
