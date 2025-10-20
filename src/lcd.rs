@@ -11,7 +11,6 @@ use embassy_rp::{
 use embassy_time::Delay;
 use embedded_hal_1::delay::DelayNs;
 use hd44780_driver::{ bus::I2CBus, error::Error, Cursor, CursorBlink, Direction, Display, HD44780 };
-use heapless::String;
 use itoa::Buffer; // For integers
 use ryu::Buffer as FloatBuffer; // For floats
 
