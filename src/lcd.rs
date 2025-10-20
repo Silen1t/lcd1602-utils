@@ -101,18 +101,6 @@ impl<'d> Lcd<'d> {
         self.driver.write_str(text, &mut self.delay).map_err(|e| (LcdError::WriteError, e))
     }
 
-    pub async fn display_text_string<const N: usize>(
-        &mut self,
-        text: String<N>,
-        clear_display: bool
-    ) -> Result<(), (LcdError, Error)> {
-        self.delay.delay_ms(self.update_screen_time);
-        if clear_display {
-            self.clear_display().await?;
-        }
-        self.driver.write_str(text.as_str(), &mut self.delay).map_err(|e| (LcdError::WriteError, e))
-    }
-
     pub async fn display_byte(
         &mut self,
         byte: u8,
