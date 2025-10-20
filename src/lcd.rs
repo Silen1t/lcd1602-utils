@@ -11,6 +11,7 @@ use embassy_rp::{
 use embassy_time::Delay;
 use embedded_hal_1::delay::DelayNs;
 use hd44780_driver::{ bus::I2CBus, error::Error, Cursor, CursorBlink, Direction, Display, HD44780 };
+use heapless::String;
 use itoa::Buffer; // For integers
 use ryu::Buffer as FloatBuffer; // For floats
 
@@ -98,6 +99,18 @@ impl<'d> Lcd<'d> {
             self.clear_display().await?;
         }
         self.driver.write_str(text, &mut self.delay).map_err(|e| (LcdError::WriteError, e))
+    }
+
+    pub async fn display_text_string<const N: usize>(
+        &mut self,
+        text: String<N>,
+        clear_display: bool
+    ) -> Result<(), (LcdError, Error)> {
+        self.delay.delay_ms(self.update_screen_time);
+        if clear_display {
+            self.clear_display().await?;
+        }
+        self.driver.write_str(text.as_str(), &mut self.delay).map_err(|e| (LcdError::WriteError, e))
     }
 
     pub async fn display_byte(
